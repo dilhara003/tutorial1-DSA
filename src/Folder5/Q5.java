@@ -2,45 +2,67 @@ package Folder5;
 
 import java.util.Scanner;
 
-public class Q5 {
+public class Q5{
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Input
+        Scanner sc = new Scanner(System.in);
         System.out.print("Enter an integer: ");
-        int number = scanner.nextInt();
+        int number = sc.nextInt();
 
-        System.out.print("Binary: ");
+        System.out.print("Binary      : ");
         convertAndPrint(number, 2);
 
-        System.out.print("Octal: ");
+        System.out.print("Octal       : ");
         convertAndPrint(number, 8);
 
-        System.out.print("Hexadecimal: ");
-        convertAndPrint(number, 16);
+        System.out.print("Hexadecimal : ");
+        convertAndPrintHex(number);
     }
 
+    // For binary and octal conversion
     public static void convertAndPrint(int number, int base) {
-        String digits = "0123456789ABCDEF";
-        Stack stack = new Stack(50);  // Arbitrary size
+        Stack stack = new Stack(100);
+        int n = number;
 
-        int temp = number;
-        if (temp == 0) {
-            System.out.println("0");
-            return;
+        if (n == 0) {
+            System.out.print("0");
         }
 
-        // Conversion logic using remainders
-        while (temp > 0) {
-            int remainder = temp % base;
-            stack.push(digits.charAt(remainder));
-            temp /= base;
+        while (n > 0) {
+            stack.push(n % base);
+            n = n / base;
         }
 
-        // Print in correct order by popping from stack
         while (!stack.isEmpty()) {
             System.out.print(stack.pop());
         }
+
+        System.out.println();
+    }
+
+    // For hexadecimal conversion (includes A–F)
+    public static void convertAndPrintHex(int number) {
+        Stack stack = new Stack(100);
+        int n = number;
+
+        if (n == 0) {
+            System.out.print("0");
+        }
+
+        while (n > 0) {
+            stack.push(n % 16);
+            n = n / 16;
+        }
+
+        while (!stack.isEmpty()) {
+            int val = stack.pop();
+            if (val < 10) {
+                System.out.print(val);
+            } else {
+                System.out.print((char) ('A' + val - 10)); // Convert 10–15 to A–F
+            }
+        }
+
         System.out.println();
     }
 }

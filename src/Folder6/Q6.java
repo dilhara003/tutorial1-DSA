@@ -1,65 +1,38 @@
 package Folder6;
 
-public class Q6 {
-    public static void main(String[] args) {
-        int[] elements = {3, 12, 9, 27, 15};
+import java.util.Arrays;
 
-        Stack mainStack = new Stack(elements.length);
-        Stack maxStack = new Stack(elements.length);
+public class Q6 {
+
+    public static void main(String[] args) {
+        int[] input = {3, 12, 9, 27, 15};
+        Stack stack = new Stack(input.length);
 
         int currentMax = Integer.MIN_VALUE;
 
-        System.out.println("Tracking max values:");
-        for (int num : elements) {
-            mainStack.push(num);
-            if (num > currentMax) {
-                currentMax = num;
+        System.out.println("Tracking maximum during push operations:");
+        for (int val : input) {
+            stack.push(val);
+            if (val > currentMax) {
+                currentMax = val;
             }
-            maxStack.push(currentMax);
-            System.out.println("Pushed: " + num + ", Current Max: " + currentMax);
+            System.out.println("Pushed " + val + ", Current Maximum: " + currentMax);
         }
 
-        // Sorting elements in descending order using a temporary stack
-        Stack sortedStack = sortDescending(mainStack);
+        // Extract elements to an array for sorting
+        int[] elements = new int[stack.size()];
+        int i = 0;
+        while (!stack.isEmpty()) {
+            elements[i++] = stack.pop();
+        }
 
-        // Output
-        System.out.print("Output (Descending): {");
-        while (!sortedStack.isEmpty()) {
-            System.out.print(sortedStack.pop());
-            if (!sortedStack.isEmpty()) System.out.print(", ");
+        // Sort in descending order
+        Arrays.sort(elements);
+        System.out.print("Final Output (Descending Order): {");
+        for (int j = elements.length - 1; j >= 0; j--) {
+            System.out.print(elements[j]);
+            if (j != 0) System.out.print(", ");
         }
         System.out.println("}");
-    }
-
-    // Sort using stack logic (selection sort style)
-    public static Stack sortDescending(Stack inputStack) {
-        Stack tempStack = new Stack(inputStack.size());
-        Stack sortedStack = new Stack(inputStack.size());
-
-        while (!inputStack.isEmpty()) {
-            int max = Integer.MIN_VALUE;
-
-            // Find the max value in inputStack
-            while (!inputStack.isEmpty()) {
-                int val = inputStack.pop();
-                if (val > max) max = val;
-                tempStack.push(val);
-            }
-
-            boolean maxPushed = false;
-
-            // Push back to inputStack except max value
-            while (!tempStack.isEmpty()) {
-                int val = tempStack.pop();
-                if (val == max && !maxPushed) {
-                    sortedStack.push(val);
-                    maxPushed = true;
-                } else {
-                    inputStack.push(val);
-                }
-            }
-        }
-
-        return sortedStack;
     }
 }

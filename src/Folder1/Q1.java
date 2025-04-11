@@ -1,25 +1,23 @@
 package Folder1;
+import java.util.Scanner;
 
 public class Q1 {
-    public static void main(String[] args){
-        String str = "ABCDE";
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter characters to reverse: ");
+        String input  = scanner.nextLine();
+        String[] letters = input.split(" ");
 
-        str = reverse(str);
-    }
+        Stack stack = new Stack(input.length());
 
-    public static String reverse(String str) {
-
-        // push each character in the string into the stack
-        char[] chars = str.toCharArray();
-        for (char c : chars) {
-            s1.push(c);
+        for (String letter : letters) {
+            stack.push(letter.charAt(0));
+        }
+        while(!stack.IsStackEmpty()){
+            System.out.println("Popped: " +stack.pop());
         }
 
-        // pop all characters and put them back to the character array
-        for (int i = 0; i < str.length(); i++) {
-        }
-
-        // convert the char array to a string and return
-        return new String(chars);
+//        System.out.println("Original String: " + input);
+//        System.out.println("Reversed String: " + Reverse);
     }
 }
