@@ -5,11 +5,9 @@ public class Q1 {
         String str = "ABCDE";
 
         str = reverse(str);
-        System.out.println("Reversed: " + str);
     }
 
     public static String reverse(String str) {
-        Stack s1 = new Stack(str.length());
 
         // push each character in the string into the stack
         char[] chars = str.toCharArray();
@@ -19,7 +17,6 @@ public class Q1 {
 
         // pop all characters and put them back to the character array
         for (int i = 0; i < str.length(); i++) {
-            chars[i] = s1.pop();
         }
 
         // convert the char array to a string and return
