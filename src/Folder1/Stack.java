@@ -5,33 +5,35 @@ public class Stack {
     private int maxSize;
     private char[] stackArray;
 
-    Stack(int size){
+    Stack(int size) {
         maxSize = size;
-        stackArray = new char[maxSize];
         top = -1;
     }
 
-    public boolean isStackEmpty(){
+    public boolean isEmpty() {
         return top == -1;
     }
 
-    public boolean isStackFull(){
+    public boolean isFull() {
         return top == maxSize - 1;
     }
 
-    public void push(char x){
-        if (isStackFull()){
+    public void push(char x) {
+        if (isFull()) {
             System.out.println("Stack is Full");
         } else {
-            stackArray[++top] = x;
+            stackArray[top++] = x;
+            System.out.println("Pushing " + x + " onto the stack.");
         }
     }
 
-    public char pop(){
-        if (isStackEmpty()){
+    public char pop() {
+        if (isEmpty()) {
             System.out.println("STACK EMPTY");
-            return '\0';
+            return '\0'; // Return null character if stack is empty
+        } else {
+            System.out.println("Popping " + stackArray[top] + " from the stack.");
+            return stackArray[top--];
         }
-        return stackArray[top--];
     }
 }

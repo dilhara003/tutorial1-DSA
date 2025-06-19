@@ -1,13 +1,13 @@
 package Folder5;
 
 public class Stack {
-    private char[] stackArray;
+    private final int[] stackArray;
     private int top;
-    private int maxSize;
+    private final int maxSize;
 
     public Stack(int size) {
         maxSize = size;
-        stackArray = new char[maxSize];
+        stackArray = new int[maxSize];
         top = -1;
     }
 
@@ -19,7 +19,7 @@ public class Stack {
         return top == maxSize - 1;
     }
 
-    public void push(char ch) {
+    public void push(int ch) {
         if (!isFull()) {
             stackArray[++top] = ch;
         } else {
@@ -27,7 +27,7 @@ public class Stack {
         }
     }
 
-    public char pop() {
+    public int pop() {
         if (!isEmpty()) {
             return stackArray[top--];
         } else {
